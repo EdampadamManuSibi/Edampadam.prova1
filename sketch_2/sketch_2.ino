@@ -19,54 +19,73 @@ void setup() {
  pinMode(Rosso2, OUTPUT);
  pinMode(Giallo2, OUTPUT);
  pinMode(Verde2, OUTPUT);
-
+ tempoRosso();
+ tempoGiallo();
+ tempoVerde();
+ numeroLampeggiVerde();
+ tempoRosso2();
+ tempoGiallo2();
+ tempoVerde2();
+ numeroLampeggiVerde2();
+ 
  
 }
 void loop() {
   ROSSO();//primo incrocio
   VERDE2();//secondo incrocio
   ROSSOGIALLO();//primo incrocio
-  lampeggia(Verde, tempo, ripetizioni);
+  lampeggia(Verde2, tempolampeggio, numerolampeggio);
   delay(1000); //secondo incrocio
   VERDE();//primo incrocio
   ROSSO2();//secondo incrocio
+  lampeggia(Verde, tempolampeggio, numerolampeggio);
+  delay(1000); //primo incrocio incrocio
+  ROSSO2GIALLO2();
+  
+  
+
 }
 void tempoRosso() {
-  Serial.println("Quanto tempo vuoi far durare il rosso? ");
+  Serial.print("Quanto tempo vuoi far durare il rosso? ");
   while (Serial.available() == 0) {};
-  durataRosso = Serial.readString().toInt();
-  Serial.print ("Il rosso durerà ");
-  Serial.print (durataRosso);
-  Serial.print(" millisecondi.");
-  // input per tempo e lampeggi
+  TempoRosso = Serial.readString().toInt();
 }
 
 void tempoGiallo() {
-  Serial.println("\n\rQuanto tempo vuoi far durare il giallo?");
+  Serial.print("Quanto tempo vuoi far durare il giallo?");
   while (Serial.available() == 0) {};
-  durataGiallo = Serial.readString().toInt();
-  Serial.print ("Il giallo durerà ");
-  Serial.print (durataGiallo);
-  Serial.print(" millisecondi.\n\r");
-  // input tempo e lampeggi
+  TempoGiallo = Serial.readString().toInt();
 }
 void tempoVerde() {
-  Serial.println("Quanto tempo vuoi far durare i lampeggi del verde? ");
+  Serial.print("Quanto tempo vuoi far durare i lampeggi del verde? ");
   while (Serial.available() == 0) {};
-  lampeggiVerde = Serial.readString().toInt();
-  Serial.print ("Il lampeggio del verde durerà ");
-  Serial.print (lampeggiVerde);
-  Serial.print(" millisecondi.\n\r");
-  // devo darli in input il tempo e i lampeggi
+  tempolampeggio = Serial.readString().toInt();
 }
 void numeroLampeggiVerde() {
-  Serial.println("Quanti lampeggi vuoi che faccia il verde? ");
+  Serial.print("Quanti lampeggi vuoi che faccia il verde? ");
   while (Serial.available() == 0) {};
-  numeroLampeggiVerde = Serial.readString().toInt();
-  Serial.print ("Il verde farà ");
-  Serial.print (numeroLampeggiVerde);
-  Serial.print(" lampeggi.\n\r");
-  // devo darli in input il tempo e i lampeggi
+  numerolampeggio = Serial.readString().toInt();
+}
+void tempoRosso2() {
+  Serial.print("Quanto tempo vuoi far durare il rosso2? ");
+  while (Serial.available() == 0) {};
+  TempoRosso = Serial.readString().toInt();
+}
+
+void tempoGiallo2() {
+  Serial.print("Quanto tempo vuoi far durare il giallo2?");
+  while (Serial.available() == 0) {};
+  TempoGiallo = Serial.readString().toInt();
+}
+void tempoVerde2() {
+  Serial.print("Quanto tempo vuoi far durare i lampeggi del verde2? ");
+  while (Serial.available() == 0) {};
+  tempolampeggio = Serial.readString().toInt();
+}
+void numeroLampeggiVerde2() {
+  Serial.print("Quanti lampeggi vuoi che faccia il verde2? ");
+  while (Serial.available() == 0) {};
+  numerolampeggio = Serial.readString().toInt();
 }
 void lampeggia(int led, int tempo, int ripetizioni) {
   for (int i = 0;i <= ripetizioni;i++)
@@ -78,6 +97,7 @@ void lampeggia(int led, int tempo, int ripetizioni) {
   digitalWrite (led,LOW);
   //ripetizione lampeggio verde
   }
+}
 void ROSSO(){
   digitalWrite(Rosso, HIGH);
   digitalWrite(Giallo, LOW);    
@@ -91,21 +111,21 @@ void ROSSOGIALLO(){
  //rossogiallo primo incrocio 
 }
 void VERDE(){
-  digitalWrite(Rosso2, LOW);
-  digitalWrite(Giallo2, LOW);    
-  digitalWrite(Verde2, HIGH);
+  digitalWrite(Rosso, LOW);
+  digitalWrite(Giallo, LOW);    
+  digitalWrite(Verde, HIGH);
  //verde primo incrocio
 }
 void ROSSO2(){
-  digitalWrite(Rosso, HIGH);
-  digitalWrite(Giallo, LOW);    
-  digitalWrite(Verde, LOW);
+  digitalWrite(Rosso2, HIGH);
+  digitalWrite(Giallo2, LOW);    
+  digitalWrite(Verde2, LOW);
  //rosso secondo incrocio 
 }
 void ROSSO2GIALLO2(){
-  digitalWrite(Rosso, HIGH);
-  digitalWrite(Giallo, HIGH);    
-  digitalWrite(Verde, LOW);
+  digitalWrite(Rosso2, HIGH);
+  digitalWrite(Giallo2, HIGH);    
+  digitalWrite(Verde2, LOW);
  //rossogiallo secondo incrocio
 }
 void VERDE2(){
