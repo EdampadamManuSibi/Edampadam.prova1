@@ -19,16 +19,11 @@ void setup() {
  pinMode(Rosso2, OUTPUT);
  pinMode(Giallo2, OUTPUT);
  pinMode(Verde2, OUTPUT);
- tempoRosso();
- tempoGiallo();
- tempoVerde();
- numeroLampeggiVerde();
- tempoRosso2();
- tempoGiallo2();
- tempoVerde2();
- numeroLampeggiVerde2();
- 
- 
+ TempoRosso = inputValori("Quanto tempo vuoi far durare il rosso? ");
+ TempoGiallo = inputValori("Quanto tempo vuoi far durare il giallo? ");
+ TempoVerde = inputValori("Quanto tempo vuoi far durare il verde?");
+ numerolampeggio = inputValori("Quanti lampeggi vuoi che faccia il verde?");
+
 }
 void loop() {
   ROSSO();//primo incrocio
@@ -45,47 +40,11 @@ void loop() {
   
 
 }
-void tempoRosso() {
-  Serial.print("Quanto tempo vuoi far durare il rosso? ");
+int inputValori(String richiesta)
+{
+  Serial.print(richiesta);
   while (Serial.available() == 0) {};
-  TempoRosso = Serial.readString().toInt();
-}
-
-void tempoGiallo() {
-  Serial.print("Quanto tempo vuoi far durare il giallo?");
-  while (Serial.available() == 0) {};
-  TempoGiallo = Serial.readString().toInt();
-}
-void tempoVerde() {
-  Serial.print("Quanto tempo vuoi far durare i lampeggi del verde? ");
-  while (Serial.available() == 0) {};
-  tempolampeggio = Serial.readString().toInt();
-}
-void numeroLampeggiVerde() {
-  Serial.print("Quanti lampeggi vuoi che faccia il verde? ");
-  while (Serial.available() == 0) {};
-  numerolampeggio = Serial.readString().toInt();
-}
-void tempoRosso2() {
-  Serial.print("Quanto tempo vuoi far durare il rosso2? ");
-  while (Serial.available() == 0) {};
-  TempoRosso = Serial.readString().toInt();
-}
-
-void tempoGiallo2() {
-  Serial.print("Quanto tempo vuoi far durare il giallo2?");
-  while (Serial.available() == 0) {};
-  TempoGiallo = Serial.readString().toInt();
-}
-void tempoVerde2() {
-  Serial.print("Quanto tempo vuoi far durare i lampeggi del verde2? ");
-  while (Serial.available() == 0) {};
-  tempolampeggio = Serial.readString().toInt();
-}
-void numeroLampeggiVerde2() {
-  Serial.print("Quanti lampeggi vuoi che faccia il verde2? ");
-  while (Serial.available() == 0) {};
-  numerolampeggio = Serial.readString().toInt();
+  return (Serial.readString().toInt());
 }
 void lampeggia(int led, int tempo, int ripetizioni) {
   for (int i = 0;i <= ripetizioni;i++)
